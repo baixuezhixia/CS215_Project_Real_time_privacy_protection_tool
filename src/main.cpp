@@ -3,7 +3,7 @@
 
 #include "FaceDetector.hpp"
 #include "PrivacyFilter.hpp"
-//-----------------------[ATTENTION]----------------------------------
+//=================================[README]==================================================
 //编译运行之前需要先绑定摄像头（bind会自动取消）
 //在powershell中运行以下命令
 // usbipd attach --busid 2-7 --wsl
@@ -16,7 +16,10 @@ g++ src/*.cpp -Iinclude `pkg-config --cflags --libs opencv4` -std=c++17 -o yunet
 */
 //运行
 //./yunet
-//----------------------------------------------------------------------
+//实时更换图片
+//地址
+//   /home/yukino/CPPCodes/Project/assets/无脸雪.png
+//============================================================================================
 
 int main(int argc, char** argv) {
   int mode = 0;  //默认“None”
@@ -181,6 +184,20 @@ int main(int argc, char** argv) {
       }
       if (mode == 2) {
         pixelBlockSize += 2;
+      }
+    }
+    if (key == 'u' || key == 'U') {
+      std::cout << "\nEnter mask image path: " << std::flush;
+      std::string newPath;
+      std::getline(std::cin, newPath);
+
+      cv::Mat newMask = cv::imread(newPath, cv::IMREAD_UNCHANGED);
+
+      if (newMask.empty()) {
+        std::cerr << "❌ Failed to load image: " << newPath << std::endl;
+      } else {
+        maskImg = newMask;
+        std::cout << "✅ Mask image updated successfully.\n";
       }
     }
 
