@@ -16,9 +16,21 @@ g++ src/*.cpp -Iinclude `pkg-config --cflags --libs opencv4` -std=c++17 -o yunet
 */
 //运行
 //./yunet
+
+//----------通过CMake编译-------------
+//编译运行之前需要先绑定摄像头（bind会自动取消）
+//在powershell中运行以下命令
+// usbipd attach --busid 2-7 --wsl
+//在terminal执行
+// cd build
+// cmake ..
+// make
+//./yunet
+
 //实时更换图片
 //地址
 //   /home/yukino/CPPCodes/Project/assets/无脸雪.png
+//   /home/yukino/CPPCodes/Project/assets/royalmask.PNG
 //============================================================================================
 
 int main(int argc, char** argv) {
